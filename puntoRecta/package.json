@@ -1,0 +1,13 @@
+{
+  "name": "puntorecta",
+  "version": "1.0.0",
+  "main": "graficar.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node graficar.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

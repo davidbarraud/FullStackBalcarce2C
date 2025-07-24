@@ -19,16 +19,10 @@ Una API REST construida con TypeScript, Express y Node.js que simula el consumo 
             - movies.services.ts
 
 ---
-## 🚀 Descripción de Archivos Principales
-
-### `app.ts`  
-📌 **Rol**: Punto de entrada de la aplicación.
-
-🔧 **Funcionalidad principal**:
-- Configura Express.
-- Habilita CORS y manejo de JSON.
-- Monta las rutas de películas.
-- Inicia el servidor en el puerto `3000`.
+## ✅ Requisitos Previos
+    Node.js instalado
+    TypeScript configurado
+    Dependencias instaladas (npm install)
 
 COMANDOS:
 - npm init -y
@@ -41,14 +35,26 @@ COMANDOS:
 En el archivo package.json agrega la siguiente línea
 "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/app.ts"
 
+## 🚀 Descripción de Archivos Principales
+
+### `app.ts`  
+📌 **Rol**: Punto de entrada de la aplicación.
+
+🔧 **Funcionalidad principal**:
+- Configura Express.
+- Habilita CORS y manejo de JSON.
+- Monta las rutas de películas.
+- Inicia el servidor en el puerto `3000`.
+
 ```ts
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/movies", moviesRouter);
-app.listen(3000);
+app.listen(3000); 
 
-routes/movies.routes.ts
+
+###routes/movies.routes.ts
 📌 Rol: Define las rutas disponibles en la API.
 
 📍 Rutas disponibles:
@@ -127,12 +133,6 @@ GET	http://localhost:3000/movies/id/1	Buscar película por ID
 GET	http://localhost:3000/movies/title/Inception	Buscar por título
 GET	http://localhost:3000/movies/search?director=Nolan	Buscar por director
 
-✅ Requisitos Previos
-Node.js instalado
-
-TypeScript configurado
-
-Dependencias instaladas (npm install)
 
 ▶️ Cómo Ejecutar
 Clona este repositorio.

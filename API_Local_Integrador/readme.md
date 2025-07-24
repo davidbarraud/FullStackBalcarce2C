@@ -4,24 +4,10 @@ Una API REST construida con TypeScript, Express y Node.js que simula el consumo 
 
 ---
 
-## 📁 Estructura del Proyecto
-
-API_Local_Integrador/
-└── src/
-├── app.ts
-├── controllers/
-│ └── movies.controller.ts
-├── repositories/
-│ ├── movies.json
-│ └── movies.repository.ts
-├── routes/
-│ └── movies.routes.ts
-└── services/
-└── movies.services.ts
+<pre> ## 📁 Estructura del Proyecto ``` API_Local_Integrador/ └── src/ ├── app.ts ├── controllers/ │ └── movies.controller.ts ├── repositories/ │ ├── movies.json │ └── movies.repository.ts ├── routes/ │ └── movies.routes.ts └── services/ └── movies.services.ts ``` </pre>
 
 
 ---
-
 ## 🚀 Descripción de Archivos Principales
 
 ### `app.ts`  

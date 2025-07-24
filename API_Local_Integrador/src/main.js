@@ -3,21 +3,26 @@ import { api } from "./api/api.js";
 
 // Elementos del DOM
 const cardContenedor = document.querySelector(".contenedorCard");
-const botonAnterior = document.getElementById("botonAnterior");
+const selectGenero = document.getElementById("selectGenero");
+const inputBusqueda = document.getElementById('inputBusqueda');
+const botonBusqueda = document.getElementById('botonBusqueda');
+const resultado = document.getElementById('resultado');
+
+/* const botonAnterior = document.getElementById("botonAnterior");
 const botonSiguiente = document.getElementById("botonSiguiente");
 const textoBotones = document.getElementById("textoBotones");
 const checkEstado = document.getElementById("checkEstado");
 const selectEstado = document.getElementById("selectEstado");
-const checkGenero = document.getElementById("checkGenero");
-const selectGenero = document.getElementById("selectGenero");
+const checkGenero = document.getElementById("checkGenero"); */
+
 
 //Variables usadas
-let paginaInicial = 1;
+/* let paginaInicial = 1;
 let totalPaginas = 42;
 let paginaActual = paginaInicial;
 let filtroEstado = "";
 let filtroGenero = "";
-let filtrosActivos = false;
+let filtrosActivos = false; */
 
 
 //Crear una card usando la API y creando también el modal con código html que crea la propia función.
@@ -45,19 +50,26 @@ let filtrosActivos = false;
          `;
           // Crea el modal sin tocar body.innerHTML
         const modal = document.createElement("div");
+        const color = rate < 7 ? 'text-warning' : 'text-success';
         modal.innerHTML = `
           <div class="modal fade " id="modal-${id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel-${id}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content modalFondo">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5 textoBlanco" id="modalLabel-${id}">#${id} ${title}</h1>
+                  <div class="d-flex flex-column">
+                    <h1 class="modal-title fs-5 textoBlanco" id="modalLabel-${id}">${title}</h1>
+                    <h2 class="fs-6 textoBlanco" ">Director: ${director}</h2>
+                  </div>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
                   <img src="${poster}" class="img-fluid mx-auto d-block mb-3" alt="${title}">
-                  
-                  <p class="textoBlanco"> Rate: ${rate}</p>
-                  <p class="textoBlanco"> Gender: ${genre}</p>
+                  <p class="textoBlanco"> Sinopsis:</p>
+                  <p class="textoBlanco textoJustificado"> ${synopsis}</p>
+                  <p class="textoBlanco"> Valoración: <span class="${color} fw-bold">${rate}</span></p>
+                  <p class="textoBlanco"> Género: ${genre}</p>
+                  <p class="textoBlanco"> Duración: ${duration} minutos</p>
+                  <p class="textoBlanco"> Año: ${year}</p>
                   
                 </div>
                 <div class="modal-footer">
@@ -71,7 +83,6 @@ let filtrosActivos = false;
 } //fin función CrearCard
     
 //Carga las películas tomando los datos del archivo JSON
-// Paginación general sin fultros. Filtra los más de 800 personajes y las 42 páginas, mostrando de a 20 personajes.
 async function mostrarDatos() {
       const apiInfo = await api.getApiDatos();
       if (apiInfo.error) {
@@ -95,8 +106,24 @@ async function mostrarGeneros(generos) {
           console.error(`Error: ${apiInfo.status} - ${apiInfo.message}`);
           return;
       }
-       
-     // console.log("Api", apiInfo);
+       // console.log("Api", apiInfo);
+      // Limpiar el contenedor antes de mostrar los nuevos
+      cardContenedor.innerHTML = "";
+      for (const elemento of apiInfo) {
+        await crearCard(elemento);
+      }
+      //actualizarBotones(pagina, apiInfo.info.pages);
+};
+
+//Muestra los datos de películas filtrados por el Título
+async function mostrarPorTitulo(titulo) {
+      const apiInfo = await api.getApiTitulo(titulo);
+      if (apiInfo.error) {
+        resultado.innerHTML = `<div class="alert alert-info">Buscando: <strong>No se encuentra la película</strong></div>`;
+          console.error(`Error: ${apiInfo.status} - ${apiInfo.message}`);
+          return;
+      }
+       // console.log("Api", apiInfo);
       // Limpiar el contenedor antes de mostrar los nuevos
       cardContenedor.innerHTML = "";
       for (const elemento of apiInfo) {
@@ -110,14 +137,37 @@ document.querySelectorAll('.genre-link').forEach(link => {
   link.addEventListener('click', async (e) => {
     e.preventDefault();
     const genre = e.target.dataset.genre;
-    mostrarGeneros(genre);
+    const texto = link.textContent.trim(); // Obtiene el texto visible (ej: "Acción")
+    if (genre ==="Todas") {
+      mostrarDatos();
+      resultado.innerHTML = `<h4 class="tituloPelisFiltro">Filtrado por: Todas</h4>`;
+    } else {
+      mostrarGeneros(genre);
+      resultado.innerHTML = `<h4 class="tituloPelisFiltro">Filtrado por: ${texto}</h4>`;
+      
+    }
     //console.log("Genero seleccionado", genre);
 
   });
 });
 
+// Función para filtrar datos por Título de película
+ botonBusqueda.addEventListener('click', () => {
+      const texto = inputBusqueda.value.trim();
+
+      if (texto !== '') {
+        resultado.innerHTML = "";
+        mostrarPorTitulo(texto);
+        
+      } else {
+        resultado.innerHTML = `<div class="alert alert-danger">Por favor, escribí el Título de la Película.</div>`;
+      }
+    });
 
 
+
+/*
+// ######## ESTE CÓDIGO QUEDA PARA APLICACIONES FUTURAS DE PAGINACIÓN ##################################
 
 // Paginación general sin fultros. Filtra los más de 800 personajes y las 42 páginas, mostrando de a 20 personajes.
 async function paginar(pagina) {
@@ -214,7 +264,7 @@ botonSiguiente.addEventListener("click", () => {
       filtrosActivos ? aplicarFiltros(paginaActual) : paginar(paginaActual);
     }
 });
-
+*/
 // Inicial
 //paginar(paginaActual);
 mostrarDatos();

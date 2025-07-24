@@ -54,7 +54,7 @@ export const api = {
         }
     },
 
-    //Función que devuelve los datos por Querys.
+    //Función que devuelve los datos por Querys de género
     async getApiGenero(genero) {
         try {
             const url = `${BASE_URL}search?genre=${genero}`;
@@ -69,4 +69,20 @@ export const api = {
             return { error: true, status: err.status, message: err.message };
         }
     },
+
+    //Función que devuelve los datos por Querys de Título
+    async getApiTitulo(titulo) {
+        try {
+            const url = `${BASE_URL}search?title=${titulo}`;
+            const res = await fetch(url);
+            if (!res.ok) {
+                throw new Error(`HTTP Error. Status: ${res.status}`);
+            }
+            const data = await res.json();
+            return data;
+        } catch (err) {
+            console.error(err);
+            return { error: true, status: err.status, message: err.message };
+        }
+    }
 };

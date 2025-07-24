@@ -125,11 +125,10 @@ getByQuery(query) - Filtra películas por atributos como el director.
 ## ▶️ Cómo Ejecutar
 Clona este repositorio.
 
-Instala las dependencias con npm install.
-
-Ejecuta el servidor con npx ts-node src/app.ts.
-
-Prueba la API en Postman o navegador.
+- Instala las dependencias con npm install.
+- Ejecuta el servidor con **npm run dev** y comprueba que salga el mensaje "Server running on port 3000"
+- Abre el archivo index.html en un servidor local como Live Server.
+- Prueba la API en Postman o navegador.
 
 ## 🧑‍💻 Autor
 Desarrollado por David Barraud como parte de un proyecto integrador del CEPIT para practicar arquitectura en capas con TypeScript, Express y JSON como base de datos simulada. 

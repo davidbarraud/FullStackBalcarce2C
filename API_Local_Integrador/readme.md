@@ -7,7 +7,6 @@ Una API REST construida con TypeScript, Express y Node.js que simula el consumo 
 ## 📁 Estructura del Proyecto
 
 API_Local_Integrador/
-│
 └── src/
 ├── app.ts
 ├── controllers/

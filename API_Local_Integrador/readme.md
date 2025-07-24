@@ -1,107 +1,107 @@
-# Aplicación para leer APIs locales
+# 📽️ Aplicación para Leer APIs Locales
 
-## Estructura General
+Una API REST construida con TypeScript, Express y Node.js que simula el consumo de datos desde un archivo JSON local como si fuera una base de datos. Ideal para proyectos integradores o pruebas sin conexión a una base de datos real.
+
+---
+
+## 📁 Estructura del Proyecto
+
 API_Local_Integrador/
 │
 └── src/
-    ├── app.ts
-    ├── controllers/
-    │   └── movies.controller.ts
-    ├── repositories/
-    │   ├── movies.json
-    │   └── movies.repository.ts
-    ├── routes/
-    │   └── movies.routes.ts
-    └── services/
-        └── movies.services.ts
-
-📄 app.ts
-📌 Rol:
-Es el punto de entrada de tu aplicación. Configura Express, CORS, JSON, y monta las rutas.
-
-🔍 Partes clave:
-
-const app = express();                  // Crea la app
-app.use(cors());                        // Permite peticiones desde otros orígenes
-app.use(express.json());                // Permite recibir JSON en POST/PUT
-app.use("/movies", moviesRouter);       // Usa el archivo de rutas
-app.listen(3000);                       // Arranca el servidor en el puerto 3000
-
-📄 routes/movies.routes.ts
-📌 Rol:
-Define las rutas de la API. Es donde configurás las URL que puede usar el cliente (Postman, navegador, etc.).
-
-🔍 Partes clave:
-router.get("/", moviesController.get);                // /movies → todos
-router.get("/id/:id", moviesController.getById);      // /movies/id/1 → por ID
-router.get("/title/:titulo", moviesController.getByParams); // /movies/title/Matrix → por título
-router.get("/search", moviesController.getByQuery);   // /movies/search?director=Nolan → filtro
+├── app.ts
+├── controllers/
+│ └── movies.controller.ts
+├── repositories/
+│ ├── movies.json
+│ └── movies.repository.ts
+├── routes/
+│ └── movies.routes.ts
+└── services/
+└── movies.services.ts
 
 
-📄 controllers/movies.controller.ts
-📌 Rol:
-Actúa como intermediario entre la ruta y el servicio. Recibe los datos de la URL o query, y llama a MoviesService.
+---
 
-🔍 Partes clave:
-constructor(private moviesService = new MoviesService()) {} // Usa el servicio
+## 🚀 Descripción de Archivos Principales
 
-get = (req, res) => res.send(this.moviesService.get());
+### `app.ts`  
+📌 **Rol**: Punto de entrada de la aplicación.
 
-getById = (req, res) => {
-    const id = req.params.id;
-    const movie = this.moviesService.getById(id);
-    movie ? res.json(movie) : res.status(404).json({ error: "No encontrado" });
-}
+🔧 **Funcionalidad principal**:
+- Configura Express.
+- Habilita CORS y manejo de JSON.
+- Monta las rutas de películas.
+- Inicia el servidor en el puerto `3000`.
 
-📄 services/movies.services.ts
-📌 Rol:
-Contiene la lógica de negocio. Se encarga de obtener los datos desde el repositorio y devolverlos al controlador.
+```ts
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use("/movies", moviesRouter);
+app.listen(3000);
 
-🔍 Partes clave:
-private repo = new MoviesRepository(); // Usa el repositorio
+routes/movies.routes.ts
+📌 Rol: Define las rutas disponibles en la API.
 
-get() {
-    return this.repo.getAll(); // Llama al método del repositorio
-}
+📍 Rutas disponibles:
 
-getByQuery(query) {
-    return this.repo.getByQuery(query); // Filtra por director u otro campo
-}
+GET /movies → Todas las películas.
 
-📄 repositories/movies.repository.ts
-📌 Rol:
-Este archivo se encarga de leer el archivo movies.json y devolver la información en memoria. Es la "capa de datos".
+GET /movies/id/:id → Película por ID.
 
-🔍 Partes clave:
-const dataPath = path.join(__dirname, './movies.json'); // Ruta del archivo JSON
+GET /movies/title/:titulo → Película por título.
 
-constructor() {
-    const fileContent = fs.readFileSync(dataPath, 'utf-8');
-    this.movies = JSON.parse(fileContent); // Carga los datos en memoria
-}
+GET /movies/search?director=Nolan → Película filtrada por director.
 
-getAll() {
-    return this.movies;
-}
+controllers/movies.controller.ts
+📌 Rol: Controlador que recibe las solicitudes y llama al servicio correspondiente.
 
-getById(id: string) {
-    return this.movies.find(movie => movie.id.toString() === id);
-}
+🔄 Responsabilidades:
 
-📄 repositories/movies.json
-📌 Rol:
-Contiene los datos de las películas en formato JSON. Es el "reemplazo de la base de datos".
+Recibir params o query del request.
+
+Invocar métodos del servicio.
+
+Devolver respuesta al cliente.
+
+services/movies.services.ts
+📌 Rol: Lógica de negocio. Interactúa con el repositorio para obtener datos.
+
+🔧 Responsabilidades:
+
+Obtener todas las películas.
+
+Buscar por ID, título o director.
+
+Delegar la lectura al repositorio.
+
+repositories/movies.repository.ts
+📌 Rol: Encargado de acceder al archivo movies.json y devolver datos en memoria.
+
+🔍 Métodos clave:
+
+getAll() → Devuelve todas las películas.
+
+getById(id) → Busca una película por su ID.
+
+getByQuery(query) → Filtra películas por atributos como el director.
+
+repositories/movies.json
+📌 Rol: Archivo de datos simulado (mock). Funciona como reemplazo de una base de datos.
+
+📄 Ejemplo de contenido:
+
 [
   {
     "id": 1,
     "titulo": "Inception",
     "director": "Christopher Nolan"
-  },
-  ...
+  }
 ]
 
-🧠 Resumen de flujo
-🧑 Cliente (Postman)
+🔁 Flujo de Datos
+🧑 Cliente (Postman o Navegador)
    ⬇
 🔗 Rutas (movies.routes.ts)
    ⬇
@@ -113,11 +113,28 @@ Contiene los datos de las películas en formato JSON. Es el "reemplazo de la bas
    ⬇
 📄 Archivo JSON (movies.json)
 
+🧪 Ejemplos de Uso en Postman
+Método	URL	Descripción
+GET	http://localhost:3000/movies	Obtener todas las películas
+GET	http://localhost:3000/movies/id/1	Buscar película por ID
+GET	http://localhost:3000/movies/title/Inception	Buscar por título
+GET	http://localhost:3000/movies/search?director=Nolan	Buscar por director
 
-🧪 Ejemplos en Postman
-| Método | URL                                                  | Acción              |
-| ------ | ---------------------------------------------------- | ------------------- |
-| GET    | `http://localhost:3000/movies`                       | Obtener todos       |
-| GET    | `http://localhost:3000/movies/1`                  | Buscar por ID       |
-| GET    | `http://localhost:3000/movies/titulo/Inception`       | Buscar por título   |
-| GET    | `http://localhost:3000/movies/search?director=Nolan` | Buscar por director |
+✅ Requisitos Previos
+Node.js instalado
+
+TypeScript configurado
+
+Dependencias instaladas (npm install)
+
+▶️ Cómo Ejecutar
+Clona este repositorio.
+
+Instala las dependencias con npm install.
+
+Ejecuta el servidor con npx ts-node src/app.ts.
+
+Prueba la API en Postman o navegador.
+
+🧑‍💻 Autor
+Desarrollado como parte de un proyecto integrador para practicar arquitectura en capas con TypeScript, Express y JSON como base de datos simulada.

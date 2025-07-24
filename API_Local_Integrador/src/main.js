@@ -37,11 +37,11 @@ let filtrosActivos = false; */
             return;
         }
         cardContenedor.innerHTML += `
-        <div class="card mb-3 cardFondo" >
+        <div class="card mb-3 cardFondo role="button" data-bs-toggle="modal" data-bs-target="#modal-${id}" >
                 <div class="row g-0 ">
                   <div class="col-md-12 ">
                     <div class="contendorNombre ">
-                      <a class="card-title textoBlanco nombreLink" href="#" data-bs-toggle="modal" data-bs-target="#modal-${id}"> ${title}</a>
+                      <a class="card-title textoBlanco nombreLink" href="#" "> ${title}</a>
                     </div>
                     <img src="${poster}" class="img-fluid rounded-start imagenCard" alt="${title}">
                   </div>

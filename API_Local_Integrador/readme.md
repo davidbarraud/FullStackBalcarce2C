@@ -3,9 +3,20 @@
 Una API REST construida con TypeScript, Express y Node.js que simula el consumo de datos desde un archivo JSON local como si fuera una base de datos. Ideal para proyectos integradores o pruebas sin conexión a una base de datos real.
 
 ---
+## 📁 Estructura del Proyecto
 
-<pre> ## 📁 Estructura del Proyecto ``` API_Local_Integrador/ └── src/ ├── app.ts ├── controllers/ │ └── movies.controller.ts ├── repositories/ │ ├── movies.json │ └── movies.repository.ts ├── routes/ │ └── movies.routes.ts └── services/ └── movies.services.ts ``` </pre>
-
+- API_Local_Integrador/
+    - src/
+        - app.ts
+        - controllers/
+            - movies.controller.ts
+        - repositories/
+            - movies.json
+            - movies.repository.ts
+        - routes/
+            - movies.routes.ts
+        - services/
+            - movies.services.ts
 
 ---
 ## 🚀 Descripción de Archivos Principales
@@ -18,6 +29,17 @@ Una API REST construida con TypeScript, Express y Node.js que simula el consumo 
 - Habilita CORS y manejo de JSON.
 - Monta las rutas de películas.
 - Inicia el servidor en el puerto `3000`.
+
+COMANDOS:
+- npm init -y
+- npm install express cors
+- npm i --save-dev @types/cors
+- npm install -D typescript ts-node-dev @types/node @types/express
+- npm - fs // para instalar el fileservices para leer archivos JSON
+- npx tsc --init
+
+En el archivo package.json agrega la siguiente línea
+"dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/app.ts"
 
 ```ts
 const app = express();

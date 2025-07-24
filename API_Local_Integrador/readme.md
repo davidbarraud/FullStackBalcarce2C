@@ -58,11 +58,12 @@ app.listen(3000);
 📌 Rol: Define las rutas disponibles en la API.
 
 📍 Rutas disponibles:
-
-GET /movies → Todas las películas.
-GET /movies/id/:id → Película por ID.
-GET /movies/title/:titulo → Película por título.
-GET /movies/search?director=Nolan → Película filtrada por director.
+```ts
+router.get("/", moviesController.get); //http://localhost:3000/movies
+router.get("/search", moviesController.getByQuery); //localhost:3000/movies/search?director=Nolan
+router.get("/titulo/:titulo", moviesController.getByParams); //http://localhost:3000/movies/titulo/Inception
+router.get("/:id", moviesController.getById); //http://localhost:3000/movies/8r9s0t1u-2v3w-4x5y-6z7a-8b9c0d1e2f3g
+```
 
 ### controllers/movies.controller.ts
 📌 Rol: Controlador que recibe las solicitudes y llama al servicio correspondiente.
@@ -87,9 +88,9 @@ Delegar la lectura al repositorio.
 
 🔍 **Métodos clave**:
 
-getAll() → Devuelve todas las películas.
-getById(id) → Busca una película por su ID.
-getByQuery(query) → Filtra películas por atributos como el director.
+getAll() - Devuelve todas las películas.
+getById(id) - Busca una película por su ID.
+getByQuery(query) - Filtra películas por atributos como el director.
 
 ### repositories/movies.json
 📌 Rol: Archivo de datos simulado (mock). Funciona como reemplazo de una base de datos.
@@ -106,23 +107,19 @@ getByQuery(query) → Filtra películas por atributos como el director.
 
 ## 🔁 Flujo de Datos
 🧑 Cliente (Postman o Navegador)
-   ⬇
 🔗 Rutas (movies.routes.ts)
-   ⬇
 🎮 Controlador (movies.controller.ts)
-   ⬇
 ⚙️ Servicio (movies.services.ts)
-   ⬇
 📁 Repositorio (movies.repository.ts)
-   ⬇
 📄 Archivo JSON (movies.json)
 
 ## 🧪 Ejemplos de Uso en Postman
-Método	URL	Descripción
-GET	http://localhost:3000/movies	Obtener todas las películas
-GET	http://localhost:3000/movies/id/1	Buscar película por ID
-GET	http://localhost:3000/movies/title/Inception	Buscar por título
-GET	http://localhost:3000/movies/search?director=Nolan	Buscar por director
+| Método | URL                                                  | Descripción                 |
+| ------ | ---------------------------------------------------- | --------------------------- |
+| GET    | `http://localhost:3000/movies`                       | Obtener todas las películas |
+| GET    | `http://localhost:3000/movies/id/1`                  | Buscar película por ID      |
+| GET    | `http://localhost:3000/movies/title/Inception`       | Buscar por título           |
+| GET    | `http://localhost:3000/movies/search?director=Nolan` | Buscar por director         |
 
 
 ## ▶️ Cómo Ejecutar

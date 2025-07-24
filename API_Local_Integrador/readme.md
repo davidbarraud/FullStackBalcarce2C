@@ -52,7 +52,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/movies", moviesRouter);
 app.listen(3000); 
-
+```
 
 ###routes/movies.routes.ts
 📌 Rol: Define las rutas disponibles en la API.

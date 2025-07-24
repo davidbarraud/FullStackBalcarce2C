@@ -339,7 +339,7 @@
     "year": "1991",
     "duration": "118",
     "director": "Jonathan Demme",
-    "poster": "/poster/poster-72703149cbab.jpg",
+    "poster": "https://images.justwatch.com/poster/304338085/s718/the-silence-of-the-lambs.jpg",
     "genre": [
       "Crime",
       "Drama",
@@ -354,7 +354,7 @@
     "year": "2009",
     "duration": "153",
     "director": "Quentin Tarantino",
-    "poster": "/poster/poster-ab33969df118.jpg",
+    "poster": "https://images.justwatch.com/poster/121974617/s166/inglorious-basterds",
     "genre": [
       "Adventure",
       "Drama",
@@ -369,7 +369,7 @@
     "year": "1972",
     "duration": "172",
     "director": "Francis Ford Coppola",
-    "poster": "https://filmartgallery.com/cdn/shop/files/The-Godfather-Vintage-Movie-Poster-Original-1-Sheet-27x41-5254.jpg?v=1709764004",
+    "poster": "https://images.justwatch.com/poster/309947338/s718/o-poderoso-chefao.jpg",
     "genre": [
       "Crime",
       "Drama"
@@ -413,7 +413,7 @@
     "poster": "https://i.ebayimg.com/images/g/5PgAAOSwEKRhZOs7/s-l1200.jpg",
     "genre": [
       "Drama",
-      "Música"
+      "Musical"
     ],
     "rate": 8.5,
     "synopsis": "Un baterista de jazz ambicioso lucha bajo la instrucción abusiva de un perfeccionista que lo lleva al límite físico y mental."

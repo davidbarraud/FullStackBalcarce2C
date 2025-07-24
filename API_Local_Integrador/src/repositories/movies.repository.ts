@@ -50,7 +50,12 @@ export class MoviesRepository {
             ? movie.year && movie.year.toString() === query.year
             : true;
 
-        return matchDirector && matchTitle && matchYear;
+        const matchGenre = query.genre
+            ? Array.isArray(movie.genre) &&
+              movie.genre.some((g: string) => g.toLowerCase() === query.genre.toLowerCase())
+            : true;
+
+        return matchDirector && matchTitle && matchYear && matchGenre;
     });
         /* if (query.director) {
             const directorParam = query.director.toLowerCase();
